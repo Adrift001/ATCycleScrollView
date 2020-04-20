@@ -20,6 +20,7 @@ public class ATCycleScrollView: UIView {
     /// 网络图片 url string 数组
     public var imagePathsGroup: [String] = [] {
         didSet {
+            invalidateTimer()
             totalItemsCount = imagePathsGroup.count * 100
             pageControl.numberOfPages = imagePathsGroup.count
             if imagePathsGroup.count > 1 {
@@ -162,6 +163,7 @@ public class ATCycleScrollView: UIView {
         c.register(ATCycleScrollViewCell.self, forCellWithReuseIdentifier: identifier)
         c.isPagingEnabled = true
         c.showsHorizontalScrollIndicator = false
+        c.backgroundColor = .clear
         return c
     }()
     
