@@ -1,0 +1,6 @@
+framework module ATCycleScrollView {
+  umbrella header "ATCycleScrollView-umbrella.h"
+
+  export *
+  module * { export * }
+}

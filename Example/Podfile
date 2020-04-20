@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'ATCycleScrollView_Example' do
+  pod 'ATCycleScrollView', :path => '../'
+end

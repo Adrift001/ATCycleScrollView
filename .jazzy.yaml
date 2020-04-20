@@ -1,0 +1,10 @@
+author: Optional
+author_url: https://jingxuetao.com/
+github_url: https://github.com/Adrift001/ATCycleScrollView
+root_url: https://jingxuetao.com/ATCycleScrollView/
+module: ATCycleScrollView
+output: docs
+theme: fullwidth
+xcodebuild_arguments: [-workspace, 'ATCycleScrollView.xcworkspace', -scheme, 'ATCycleScrollView']
+clean: true
+readme: README.md

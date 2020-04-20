@@ -1,0 +1,23 @@
+PODS:
+  - ATCycleScrollView (0.1.0):
+    - Kingfisher
+  - Kingfisher (4.10.1)
+
+DEPENDENCIES:
+  - ATCycleScrollView (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+
+EXTERNAL SOURCES:
+  ATCycleScrollView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ATCycleScrollView: d4ed19760423bf7de12fa4210f733fdba4eaf776
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+
+PODFILE CHECKSUM: fb5df1d856500f51faec57207fd69ec10ef2e3ed
+
+COCOAPODS: 1.9.1
