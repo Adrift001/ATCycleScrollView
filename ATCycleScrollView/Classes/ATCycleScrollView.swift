@@ -10,15 +10,18 @@ import Kingfisher
 
 public class ATCycleScrollView: UIView {
     
-    var totalItemsCount = 0
+    /// 自动滚动间隔时间,默认2s
+    public var autoScrollTimeInterval: TimeInterval = 2 {
+        didSet {
+            setAutoScroll()
+        }
+    }
     
-    let identifier = "ATCycleScrollViewCell"
-    
-    var timer: Timer?
-    
+    /// 网络图片 url string 数组
     public var imagePathsGroup: [String] = [] {
         didSet {
             totalItemsCount = imagePathsGroup.count * 100
+            pageControl.numberOfPages = imagePathsGroup.count
             if imagePathsGroup.count > 1 {
                 collectionView.isScrollEnabled = true
                 setupTimer()
@@ -30,6 +33,33 @@ public class ATCycleScrollView: UIView {
         }
     }
     
+    /// 当前分页控件小圆标颜色
+    public var currentPageDotColor = UIColor.white {
+        didSet {
+            pageControl.currentPageIndicatorTintColor = currentPageDotColor
+        }
+    }
+    
+    /// 其他分页控件小圆标颜色
+    public var pageDotColor = UIColor.lightGray {
+        didSet {
+            pageControl.pageIndicatorTintColor = pageDotColor
+        }
+    }
+    
+    /// 分页控件距离轮播图的底部间距（在默认间距基础上）的偏移量
+    public var pageControlBottomOffset: CGFloat = 0
+    
+    /// 分页控件距离轮播图的右边间距（在默认间距基础上）的偏移量
+    public var pageControlRightOffset: CGFloat = 0
+    
+    private var totalItemsCount = 0
+
+    private let identifier = "ATCycleScrollViewCell"
+    private let pageControlDotSize = CGSize(width: 10, height: 10)
+    
+    private var timer: Timer?
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         addConstraints()
@@ -38,6 +68,11 @@ public class ATCycleScrollView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addConstraints()
+    }
+    
+    func setAutoScroll() {
+        invalidateTimer()
+        setupTimer()
     }
     
     func scrollToIndex(targetIndex: Int) {
@@ -64,7 +99,7 @@ public class ATCycleScrollView: UIView {
     }
     
     func setupTimer() {
-        timer = Timer(timeInterval: 2, target: self, selector: #selector(automaticScroll), userInfo: nil, repeats: true)
+        timer = Timer(timeInterval: autoScrollTimeInterval, target: self, selector: #selector(automaticScroll), userInfo: nil, repeats: true)
         RunLoop.main.add(timer!, forMode: .common)
     }
     
@@ -79,6 +114,7 @@ public class ATCycleScrollView: UIView {
     
     func addConstraints() {
         addSubview(collectionView)
+        addSubview(pageControl)
     }
     
     public override func layoutSubviews() {
@@ -94,6 +130,20 @@ public class ATCycleScrollView: UIView {
 //            targetIndex = Int(Double(totalItemsCount) * 0.5)
 //        }
 //        collectionView.scrollToItem(at: IndexPath(item: targetIndex, section: 0), at: .left, animated: false)
+        
+        let size = CGSize(width: CGFloat(imagePathsGroup.count) * pageControlDotSize.width * 1.5, height: pageControlDotSize.height)
+        let x = (self.width - size.width) * 0.5
+        let y = collectionView.height - size.height - 10
+        var pageControlFrame = CGRect(x: x, y: y, width: size.width, height: size.height)
+        pageControlFrame.origin.y -= pageControlBottomOffset
+        pageControlFrame.origin.x -= pageControlRightOffset
+        pageControl.frame = pageControlFrame
+    }
+    
+    public override func willMove(toSuperview newSuperview: UIView?) {
+        if newSuperview == nil {
+            invalidateTimer()
+        }
     }
     
     lazy var layout: UICollectionViewFlowLayout = {
@@ -114,6 +164,14 @@ public class ATCycleScrollView: UIView {
         c.showsHorizontalScrollIndicator = false
         return c
     }()
+    
+    lazy var pageControl: UIPageControl = {
+        let p = UIPageControl()
+        p.isUserInteractionEnabled = false
+        p.currentPageIndicatorTintColor = currentPageDotColor
+        p.pageIndicatorTintColor = pageDotColor
+        return p
+    }()
 }
 
 extension ATCycleScrollView: UICollectionViewDataSource {
@@ -126,7 +184,6 @@ extension ATCycleScrollView: UICollectionViewDataSource {
         let itemIndex = pageControlIndexWithCurrentCellIndex(index: indexPath.item)
         let url = imagePathsGroup[itemIndex]
         cell.imageView.kf.setImage(with: URL(string: url))
-        print(indexPath.row)
         return cell
     }
 }
@@ -138,11 +195,12 @@ extension ATCycleScrollView: UICollectionViewDelegateFlowLayout {
 extension ATCycleScrollView: UIScrollViewDelegate {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if imagePathsGroup.isEmpty {
-//            return
-//        }
-//        let itemIndex = currentIndex()
-//        let index
+        if imagePathsGroup.isEmpty {
+            return
+        }
+        let itemIndex = currentIndex()
+        let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: itemIndex)
+        pageControl.currentPage = indexOnPageControl
     }
     
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

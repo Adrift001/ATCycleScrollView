@@ -9,8 +9,6 @@ import UIKit
 
 class ATCycleScrollViewCell: UICollectionViewCell {
     
-    let height: CGFloat = 30
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addConstraints()
@@ -23,7 +21,6 @@ class ATCycleScrollViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300)
-        titleLabel.frame = CGRect(x: 0, y: bounds.height - CGFloat(height), width: bounds.width, height: height)
     }
     
     func addConstraints() {
@@ -33,10 +30,5 @@ class ATCycleScrollViewCell: UICollectionViewCell {
     lazy var imageView: UIImageView = {
         let iv = UIImageView()
         return iv
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let l = UILabel()
-        return l
     }()
 }

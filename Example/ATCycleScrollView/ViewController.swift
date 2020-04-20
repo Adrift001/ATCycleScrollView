@@ -21,6 +21,7 @@ class ViewController: UIViewController {
             "https://files.elong.work/images/7474e17a65909a0b3b5cb53becbd560b.jpg",
             "https://files.elong.work/images/731eb377705ec2b837dabef5c373fcfa.jpg",
         ]
+        scrollView.pageControlBottomOffset = 15
     }
 
     override func didReceiveMemoryWarning() {
