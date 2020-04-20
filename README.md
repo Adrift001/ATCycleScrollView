@@ -1,6 +1,5 @@
 # ATCycleScrollView
 
-[![CI Status](https://img.shields.io/travis/Adrift001/ATCycleScrollView.svg?style=flat)](https://travis-ci.org/Adrift001/ATCycleScrollView)
 [![Version](https://img.shields.io/cocoapods/v/ATCycleScrollView.svg?style=flat)](https://cocoapods.org/pods/ATCycleScrollView)
 [![License](https://img.shields.io/cocoapods/l/ATCycleScrollView.svg?style=flat)](https://cocoapods.org/pods/ATCycleScrollView)
 [![Platform](https://img.shields.io/cocoapods/p/ATCycleScrollView.svg?style=flat)](https://cocoapods.org/pods/ATCycleScrollView)
@@ -20,9 +19,13 @@ it, simply add the following line to your Podfile:
 pod 'ATCycleScrollView'
 ```
 
+## Documetation
+
+[https://jingxuetao.com/ATCycleScrollView/](https://jingxuetao.com/ATCycleScrollView/)
+
 ## Author
 
-Adrift001, jingxuetao@qq.com
+Adrift001, me@jingxuetao.com
 
 ## License
 
