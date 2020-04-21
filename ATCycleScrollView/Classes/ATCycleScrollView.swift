@@ -10,6 +10,9 @@ import Kingfisher
 
 public class ATCycleScrollView: UIView {
     
+    /// block方式监听点击
+    var clickItemOperationBlock: ((Int) -> ())?
+    
     /// 自动滚动间隔时间,默认2s
     public var autoScrollTimeInterval: TimeInterval = 2 {
         didSet {
@@ -191,7 +194,9 @@ extension ATCycleScrollView: UICollectionViewDataSource {
 }
 
 extension ATCycleScrollView: UICollectionViewDelegateFlowLayout {
-    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        clickItemOperationBlock?(pageControlIndexWithCurrentCellIndex(index: indexPath.row))
+    }
 }
 
 extension ATCycleScrollView: UIScrollViewDelegate {
