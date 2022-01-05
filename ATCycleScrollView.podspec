@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ATCycleScrollView'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = '图片轮播'
 
 # This description is used to generate tags and improve search results.
@@ -28,9 +28,9 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/Adrift001/ATCycleScrollView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
 
-  s.source_files = 'ATCycleScrollView/Classes/**/*'
+  s.source_files = 'Sources/ATCycleScrollView/**/*'
   
   s.swift_version = "5.2"
   

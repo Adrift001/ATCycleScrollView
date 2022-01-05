@@ -6,6 +6,6 @@ final class ATCycleScrollViewTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(ATCycleScrollView().text, "Hello, World!")
+        XCTAssertEqual(ATCycleScrollView().currentPageDotColor, UIColor.white)
     }
 }
